@@ -1,0 +1,74 @@
+Всякие команды
+
+"C:\Program Files\Python312\python.exe" -m venv venv
+
+python -m venv venv
+venv\Scripts\activate
+python -m pip install --upgrade pip
+
+pip install -r requirements.txt 
+
+
+Собираем образ
+$ docker build -t mlmodel:latest .
+ 
+
+Запускаем контейнер
+$ docker run -p 5000:5000 mlmodel:latest &
+ 
+
+docker-compose up --build
+
+
+
+# 1. Собрать API (создаст shopper-api:latest)
+docker-compose build api
+
+# 2. Собрать дашборд и всё остальное
+docker-compose up --build
+
+
+curl -X POST http://localhost/api/predict -H "Content-Type: application/json" -d "{\"Administrative\":0,\"Administrative_Duration\":0.0,\"Informational\":0,\"Informational_Duration\":0.0,\"ProductRelated\":37,\"ProductRelated_Duration\":1065.25641,\"BounceRates\":0.020767196,\"ExitRates\":0.054225865,\"PageValues\":0.0,\"SpecialDay\":0.0,\"OperatingSystems\":1,\"Browser\":1,\"Region\":8,\"TrafficType\":1,\"Weekend\":1,\"VisitorType_New_Visitor\":0,\"VisitorType_Other\":0,\"VisitorType_Returning_Visitor\":1,\"Month_Aug\":0,\"Month_Dec\":1,\"Month_Feb\":0,\"Month_Jul\":0,\"Month_June\":0,\"Month_Mar\":0,\"Month_May\":0,\"Month_Nov\":0,\"Month_Oct\":0,\"Month_Sep\":0}"
+
+
+$body = @{
+    Administrative = 0
+    Administrative_Duration = 0.0
+    Informational = 0
+    Informational_Duration = 0.0
+    ProductRelated = 37
+    ProductRelated_Duration = 1065.25641
+    BounceRates = 0.020767196
+    ExitRates = 0.054225865
+    PageValues = 1000.0
+    SpecialDay = 0.0
+    OperatingSystems = 1
+    Browser = 1
+    Region = 8
+    TrafficType = 1
+    Weekend = 1
+    VisitorType_New_Visitor = 0
+    VisitorType_Other = 0
+    VisitorType_Returning_Visitor = 1
+    Month_Aug = 0
+    Month_Dec = 1
+    Month_Feb = 0
+    Month_Jul = 0
+    Month_June = 0
+    Month_Mar = 0
+    Month_May = 0
+    Month_Nov = 0
+    Month_Oct = 0
+    Month_Sep = 0
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost/api/predict" -Method Post -Body $body -ContentType "application/json"
+
+-------------------------------------------------------
+---------итго----------
+сборка 
+docker-compose up --build
+
+запуск тестоного Powershell скрипта
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\test-model.ps1

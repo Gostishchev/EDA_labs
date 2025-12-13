@@ -1,0 +1,40 @@
+#Dockerfile.model
+# === Этап сборки модели ===
+FROM python:3.12-slim AS builder
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY online_shoppers_intention.csv .
+COPY eda.py model.py requirements-api.txt .
+
+RUN python -m pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements-api.txt
+
+# Запускаем оба скрипта — они сохраняют файлы в /usr/src/app
+RUN python eda.py
+RUN python model.py
+
+# === Финальный образ: API ===
+FROM python:3.12-slim
+
+WORKDIR /usr/src/app
+
+# Создаём целевые директории
+RUN mkdir -p /app/models /app/data
+
+COPY --from=builder /usr/src/app/requirements-api.txt .
+RUN python -m pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements-api.txt
+
+# Копируем модель и данные из builder-этапа в нужные места
+COPY --from=builder /usr/src/app/trained_model.cbm /app/models/
+COPY --from=builder /usr/src/app/preprocessed_data.csv /app/data/
+
+COPY app.py .
+
+EXPOSE 5000
+CMD ["python", "app.py"]
