@@ -9,5 +9,8 @@ https://colab.research.google.com/drive/1kFzBx8duPTKiw9k0iC9WNAP67YWS2iR0#scroll
 https://colab.research.google.com/drive/1Yw05fUwLS4T4_7K2m2fK-cR-SugQPnhz#scrollTo=sYG3e6h4G5xW
 В папке сохранен отчет pandas  и csv  с датафреймом
 
+Лабараторная работа 3
+https://colab.research.google.com/drive/1DfSjaAkhOVOmQJULgC3MhWQCda2FOXIv#scrollTo=KhClJVv6x8XZ
+
 Лабораторная работа 6
 docker pull dima2m/mlmodel:latest
