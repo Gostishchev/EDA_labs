@@ -15,6 +15,8 @@ https://colab.research.google.com/drive/1DfSjaAkhOVOmQJULgC3MhWQCda2FOXIv#scroll
 Лабараторная работа 4
 https://colab.research.google.com/drive/1SxUKofhkC-7v2vHyxuaYwD7vXfl5RRfT#scrollTo=JUJGKL0LFzov
 
+Лабараторная работа 5
+https://colab.research.google.com/drive/1CcP20pwJlrXx4mRFgfU6j7Qyq1urqKN4#scrollTo=idgVkO8fYfq_
 
 Лабораторная работа 6
 docker pull dima2m/mlmodel:latest
